@@ -6,7 +6,7 @@ class FfmpegAT28 < Formula
   # None of these parts are used by default, you have to explicitly pass `--enable-gpl`
   # to configure to activate them. In this case, FFmpeg's license changes to GPL v2+.
   license "GPL-2.0-or-later"
-  revision 2
+  revision 3
 
   livecheck do
     url "https://ffmpeg.org/download.html"
@@ -48,7 +48,7 @@ class FfmpegAT28 < Formula
   depends_on "speex"
   depends_on "theora"
   depends_on "x264"
-  depends_on "x265"
+  depends_on "x265@3.6"
   depends_on "xvid"
   depends_on "xz"
 
@@ -60,6 +60,8 @@ class FfmpegAT28 < Formula
   end
 
   def install
+    ENV.prepend_path "PKG_CONFIG_PATH", Formula["x265@3.6"].opt_lib/"pkgconfig"
+
     # Work-around for build issue with Xcode 15.3
     ENV.append_to_cflags "-Wno-incompatible-function-pointer-types" if DevelopmentTools.clang_build_version >= 1500
 

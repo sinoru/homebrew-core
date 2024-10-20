@@ -6,7 +6,7 @@ class FfmpegAT5 < Formula
   # None of these parts are used by default, you have to explicitly pass `--enable-gpl`
   # to configure to activate them. In this case, FFmpeg's license changes to GPL v2+.
   license "GPL-2.0-or-later"
-  revision 1
+  revision 2
 
   livecheck do
     url "https://ffmpeg.org/download.html"
@@ -59,7 +59,7 @@ class FfmpegAT5 < Formula
   depends_on "theora"
   depends_on "webp"
   depends_on "x264"
-  depends_on "x265"
+  depends_on "x265@3.6"
   depends_on "xvid"
   depends_on "xz"
   depends_on "zeromq"
@@ -88,6 +88,8 @@ class FfmpegAT5 < Formula
   fails_with gcc: "5"
 
   def install
+    ENV.prepend_path "PKG_CONFIG_PATH", Formula["x265@3.6"].opt_lib/"pkgconfig"
+    
     # The new linker leads to duplicate symbol issue https://github.com/homebrew-ffmpeg/homebrew-ffmpeg/issues/140
     ENV.append "LDFLAGS", "-Wl,-ld_classic" if DevelopmentTools.clang_build_version >= 1500
 

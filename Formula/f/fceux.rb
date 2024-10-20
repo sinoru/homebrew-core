@@ -30,13 +30,13 @@ class Fceux < Formula
   depends_on "cmake" => :build
   depends_on "pkg-config" => :build
 
-  depends_on "ffmpeg"
+  depends_on "ffmpeg@6"
   depends_on "libarchive"
   depends_on "minizip"
   depends_on "qt"
   depends_on "sdl2"
   depends_on "x264"
-  depends_on "x265"
+  depends_on "x265@3.6"
 
   on_linux do
     depends_on "mesa"
@@ -47,6 +47,8 @@ class Fceux < Formula
   fails_with gcc: "5"
 
   def install
+    ENV.prepend_path "PKG_CONFIG_PATH", Formula["ffmpeg@6"].opt_lib/"pkgconfig"
+    ENV.prepend_path "PKG_CONFIG_PATH", Formula["x265@3.6"].opt_lib/"pkgconfig"
     ENV["CXXFLAGS"] = "-DPUBLIC_RELEASE=1" if build.stable?
     system "cmake", ".", *std_cmake_args, "-DQT6=ON"
     system "make"

@@ -1,10 +1,9 @@
-class X265 < Formula
+class X265AT36 < Formula
   desc "H.265/HEVC encoder"
   homepage "https://bitbucket.org/multicoreware/x265_git"
-  url "https://bitbucket.org/multicoreware/x265_git/downloads/x265_4.0.tar.gz"
-  sha256 "75b4d05629e365913de3100b38a459b04e2a217a8f30efaa91b572d8e6d71282"
+  url "https://bitbucket.org/multicoreware/x265_git/get/3.6.tar.gz"
+  sha256 "206329b9599c78d06969a1b7b7bb939f7c99a459ab283b2e93f76854bd34ca7b"
   license "GPL-2.0-only"
-  head "https://bitbucket.org/multicoreware/x265_git.git", branch: "master"
 
   bottle do
     sha256 cellar: :any,                 arm64_sequoia:  "9d5cc2819d36a019616fe084fc842a57bd169de59c1df477e5dabe376e702f78"
@@ -16,6 +15,8 @@ class X265 < Formula
     sha256 cellar: :any,                 monterey:       "8824a782a3c8a6f7b319751292ff3a9074e02ba6e54b4e80fec01fdb6aff254c"
     sha256 cellar: :any_skip_relocation, x86_64_linux:   "2d876f2d12e9eaff8c98a01af67852e864e75fc9f6a1f818164c7b1d8d6688dc"
   end
+
+  keg_only :versioned_formula
 
   depends_on "cmake" => :build
 
